@@ -205,7 +205,7 @@ class Timeconditions extends FreePBX_Helpers implements BMO {
 				$sth->execute();
 				$row = $sth->fetch(PDO::FETCH_ASSOC);
 				$timegroupslist = $this->listTimegroups(false, true);
-				return ["status" => true, "groups" => $timegroupslist, "last" => $row['id']];
+				return ["status" => true, "groups" => $timegroupslist, "last" => ($row['id'] ?? '')];
 			case 'getJSON':
 				switch ($request['jdata']) {
 					case 'tggrid':
