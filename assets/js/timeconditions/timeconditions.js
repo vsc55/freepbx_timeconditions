@@ -188,30 +188,19 @@ $("#calendar-id, #calendar-group").change(function() {
 });
 /* Removing self time codition entry from the destination list */
 $(document).on('change', 'select[name="goto0"], select[name="goto1"]', function() {
-	if ($("select[id^='goto0']").val() == "Time_Conditions") {
-		var changeEventDestMatch = false;
-		$("#Time_Conditions0").find('option').each(function() {
-			if ($(this).text() == $("#displayname").val()) {
-				$(this).remove();
-				changeEventDestMatch = true;
-			}
-		});
-		var firstOption0 = $("#Time_Conditions0").find('option').first();
-		if (firstOption0.val() == 'popover' && changeEventDestMatch) {
-			$("#Time_Conditions0.destdropdown2").trigger("change");
-		}
-	}
-	if ($("select[id^='goto1']").val() == "Time_Conditions") {
-		var changeEventDestNonMatch = false;
-		$("#Time_Conditions1").find('option').each(function() {
-			if ($(this).text() == $("#displayname").val()) {
-				$(this).remove();
-				changeEventDestNonMatch = true;
-			}
-		});
-		var firstOption1 = $("#Time_Conditions1").find('option').first();
-		if (firstOption1.val() == 'popover' && changeEventDestNonMatch) {
-			$("#Time_Conditions1.destdropdown2").trigger("change");
-		}
-	}
+        if ($("select[id^='goto0']").val() == "Time_Conditions") {
+                $("#Time_Conditions0").find('option').each(function() {
+                        if ($(this).text() == $("#displayname").val()) {
+                                $(this).remove();
+                        }
+                });
+        }
+
+        if ($("select[id^='goto1']").val() == "Time_Conditions") {
+                $("#Time_Conditions1").find('option').each(function() {
+                        if ($(this).text() == $("#displayname").val()) {
+                                $(this).remove();
+                        }
+                });
+        }
 });
