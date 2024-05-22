@@ -14,7 +14,8 @@ class Timeconditions extends Base {
 			\FreePBX::Modules()->loadFunctionsInc('timeconditions');
 			$timeconditions = timeconditions_list();
 			$timeconditions = $timeconditions ?: false;
-			return $response->withJson($timeconditions);
+			$response->getBody()->write(json_encode($timeconditions));
+			return $response->withHeader('Content-Type', 'application/json');
 		})->add($this->checkAllReadScopeMiddleware());
 
 		/**
@@ -24,14 +25,15 @@ class Timeconditions extends Base {
 		 */
 		$app->get('/{id}', function ($request, $response, $args) {
 			$timeconditions = [];
-   \FreePBX::Modules()->loadFunctionsInc('timeconditions');
+			\FreePBX::Modules()->loadFunctionsInc('timeconditions');
 			$tcstate = timeconditions_get_state($args['id']);
 			if ($tcstate !== false) {
 				$timeconditions = [];
 				$timeconditions['state'] = $tcstate;
 			}
 			$timeconditions = $timeconditions ?: false;
-			return $response->withJson($timeconditions);
+			$response->getBody()->write(json_encode($timeconditions));
+			return $response->withHeader('Content-Type', 'application/json');
 		})->add($this->checkAllReadScopeMiddleware());
 
 		/**
@@ -41,7 +43,8 @@ class Timeconditions extends Base {
 		$app->put('/{id}', function ($request, $response, $args) {
 			\FreePBX::Modules()->loadFunctionsInc('timeconditions');
 			$params = $request->getParsedBody();
-			return $response->withJson(timeconditions_set_state($args['id'], $params['state']));
+			$response->getBody()->write(json_encode(timeconditions_set_state($args['id'] ?? '', $params['state'] ?? '')));
+			return $response->withHeader('Content-Type', 'application/json');
 		})->add($this->checkAllWriteScopeMiddleware());
 	}
 }
