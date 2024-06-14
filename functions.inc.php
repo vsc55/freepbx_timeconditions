@@ -758,7 +758,7 @@ function timeconditions_timegroups_drawtimeselects($name, $time) {
 					</select>
 				</div>
 				<div class="col-md-1 offset-md-4">
-					<a href="#" class="delTG pull-right" data-for="fs'.$name.'">
+					<a href="#" class="delTG delAction pull-right" data-for="fs'.$name.'">
 						<i class="fa fa-trash fa-lg"></i>
 					</a>
 				</div>';
