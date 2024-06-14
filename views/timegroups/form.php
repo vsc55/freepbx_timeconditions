@@ -51,7 +51,7 @@ $description??='';
 						<i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
 					</div>
 					<div class="col-md-9">
-						<input type="text" class="form-control" id="description" name="description" onchange="check_empty(this.value);" value="<?php echo (isset($description))? "tg-".strtotime("now") : htmlspecialchars((string) ($description ?? '')) ?>" required>
+					<input type="text" class="form-control" id="description" name="description" onchange="check_empty(this.value);" value="<?php echo (empty($description))? "tg-".strtotime("now") : htmlspecialchars((string) ($description)) ?>" required>
 					</div>
 				</div>
 			</div>

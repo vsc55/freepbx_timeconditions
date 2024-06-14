@@ -83,7 +83,7 @@ $(document).on('click',"#addTime",function(e){
 $(document).on('click',".delTG",function(e){
 	e.preventDefault();
 	var rulecount = $(".delTG").length;
-	var elem = $(this).parent();
+	var elem = $(this).closest('span[id^="fstimes"]');
 	if(rulecount > 1){
 		elem.remove();
 	}else{
