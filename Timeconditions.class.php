@@ -544,9 +544,8 @@ class Timeconditions extends FreePBX_Helpers implements BMO {
 	public function editTimeCondition($id,$post){
 		$displayname = empty($post['displayname'])?_("unnamed"):$post['displayname'];
 		$invert_hint = ($post['invert_hint'] === '1') ? '1' : '0';
-		$vars = [':id' => $id, ':displayname' => $displayname ?? '', ':time' => $post['time'] ?? 0, ':timezone' => $post['timezone'] ?? '', ':falsegoto' => $post[$post['goto1'].'1'] ?? '', ':truegoto' => $post[$post['goto0'].'0'] ?? '', ':invert_hint' => $invert_hint ?? 0, ':fcc_password' => $post['fcc_password'] ?? '', ':deptname' => $post['deptname'] ?? '', ':generate_hint' => '1', ':mode' => $post['mode'] ?? '', ':calendar_id' => $post['calendar-id'] ?? '', ':calendar_group_id' => $post['calendar-group'] ?? ''];
+		$vars = [':id' => $id, ':displayname' => $displayname ?? '', ':time' => (!empty($post['time']) ? $post['time'] : 0), ':timezone' => $post['timezone'] ?? '', ':falsegoto' => $post[$post['goto1'].'1'] ?? '', ':truegoto' => $post[$post['goto0'].'0'] ?? '', ':invert_hint' => $invert_hint ?? 0, ':fcc_password' => $post['fcc_password'] ?? '', ':deptname' => $post['deptname'] ?? '', ':generate_hint' => '1', ':mode' => $post['mode'] ?? '', ':calendar_id' => $post['calendar-id'] ?? '', ':calendar_group_id' => $post['calendar-group'] ?? ''];
 		$old = $this->getTimeCondition($id);
-
 		$sql = "UPDATE timeconditions SET displayname = :displayname, time = :time, truegoto = :truegoto, falsegoto = :falsegoto, deptname = :deptname, generate_hint = :generate_hint, invert_hint = :invert_hint, fcc_password = :fcc_password, timezone = :timezone, mode = :mode, calendar_id = :calendar_id, calendar_group_id = :calendar_group_id WHERE timeconditions_id = :id";
 		$stmt = $this->Database->prepare($sql);
 		$stmt->execute($vars);
